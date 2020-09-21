@@ -1,20 +1,20 @@
 {
-  "name": "electron-quick-start",
+  "name": "mylabel",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "build":{
-    "appId": "MyLabel",
+    "appId": "mylabel",
     "win": {
       "target": ["nsis", "zip"]
     }
   },
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager ./ MyLabel --out ./dist",
+    "package": "electron-packager ./ mylabel --out ./dist",
     "dist": "electron-builder --win --x64"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/asiwen/MyLabel",
   "keywords": [
     "Electron",
     "quick",
@@ -22,7 +22,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Tranq",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^10.1.2"
