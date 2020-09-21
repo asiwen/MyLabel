@@ -9,4 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
-})
+
+  window.$ = window.jQuery = require('jquery');
+  Object.assign(window, require('bootstrap'));
+});

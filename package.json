@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
+  "build":{
+    "appId": "MyLabel",
+    "win": {
+      "target": ["nsis", "zip"]
+    }
+  },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager ./ MyLabel --out ./dist",
+    "dist": "electron-builder --win --x64"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -18,5 +26,10 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^10.1.2"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
   }
 }
