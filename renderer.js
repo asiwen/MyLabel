@@ -37,7 +37,7 @@ window.addEventListener('keyup', (e) => {
     // ArrowLeft, keyCode:37,
     // ArrowRight, keyCode:39
     // Enter, keyCode: 13
-    // console.log(e);
+    console.log(e);
     switch (e.keyCode) {
         case 32:
             console.log('input label:');

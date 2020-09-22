@@ -1,12 +1,11 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu, dialog} = require('electron')
 const path = require('path')
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -14,9 +13,55 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
+  mainWindow.maximize();
+  mainWindow.show();
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+}
+
+function initMenu() {
+  let templates = [{
+      label: 'File',
+      submenu: [{
+        label: 'Open',
+        accelerator: 'CmdOrCtrl+O',
+        click: () => {
+          dialog.showOpenDialog({title:'Please select a directory.', properties: ['openDirectory']})
+          .then(result => {
+            console.log(result.canceled);
+            console.log(result.filePaths);
+          })
+        }
+      }, {
+        label: 'Quit',
+        accelerator: 'CmdOrCtrl+Q',
+        role: 'close'
+      }]
+    }, {
+      label: 'Help',
+      submenu: [{
+        label: 'Manual',
+        accelerator: 'CmdOrCtrl+H',
+        click: () => {
+          dialog.showMessageBoxSync({
+            title: 'mylabel - Manual',
+            message: '使用方法:',
+            detail: '按“空格”键：开始标记； 按“<-”或“->”键： 切换到“上一个”或“下一个”'
+          });
+        }
+      }, {
+        label: 'ForceLoad',
+        accelerator: 'F5',
+        role: 'forceload'
+      }, {
+        label: 'DevTools',
+        accelerator: 'F12',
+        role: 'toggleDevTools'
+      }]
+    }
+  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(templates));
 }
 
 // This method will be called when Electron has finished
@@ -24,7 +69,9 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow()
-  
+
+  initMenu()
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
