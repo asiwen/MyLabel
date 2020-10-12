@@ -95,7 +95,7 @@
     });
 
     $(ID_LINK_LABELS).click(() => {
-        const url = 'https://i.zte.com.cn/#/space/a21e895c09104b3d8e231f5e3467abbe/wiki/page/3f6e4d6f6dbe477c8db8ddea3d8ca469/view';
+        const url = '#';
         ipcRenderer.send('open-modaldialog', { url: url });
     });
 
